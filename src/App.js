@@ -1,56 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import { Image } from "@chakra-ui/image";
+import { Box, Text, Container } from "@chakra-ui/layout";
+import React from "react";
+import { Counter } from "./features/counter/Counter";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
+      <Box
+        bg="brand.300"
+        minH="100vh"
+        d="flex"
+        justifyContent="center"
+        marginBottom="0"
+      >
+        <Container bg="brand.800" maxW="container.xl">
+          <Text
+            fontSize="5xl"
+            color="brand.300"
+            fontWeight="bold"
+            marginTop="1rem"
           >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
+            Welcome #
+          </Text>
+
+          <Box
+            borderWidth="1px"
+            borderColor="brand.400"
+            borderRadius="lg"
+            overflow="hidden"
+            marginTop="2rem"
+            maxW="sm"
           >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
+            <Image src="https://bit.ly/sage-adebayo" alt="Segun Adebayo" />
+            <Text fontSize="2xl">Segun</Text>
+          </Box>
+        </Container>
+      </Box>
     </div>
   );
 }
