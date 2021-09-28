@@ -16,7 +16,7 @@ export default function AppNav() {
       <Text flex="1">PokedexApp</Text>
       <UnorderedList display="flex" flexDir="row" listStyleType="none">
         <ListItem m="6">Home</ListItem>
-        <ListItem m="6">My Pokemon</ListItem>
+        <ListItem m="6">My Pokemons</ListItem>
         <ListItem my="6" ml="6">
           Categories
         </ListItem>

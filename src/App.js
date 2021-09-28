@@ -1,5 +1,6 @@
-import { Box, Text, Container, Heading } from "@chakra-ui/layout";
+import { Box, Container } from "@chakra-ui/layout";
 import React from "react";
+import ListPokemon from "./components/ListPokemon";
 import SearchPokemon from "./components/SearchPokemon";
 import { Counter } from "./features/counter/Counter";
 import AppLayout from "./layout/AppLayout";
@@ -16,8 +17,8 @@ function App() {
         marginBottom="0"
       >
         <Container bg="brand.800" maxW="container.xl" p="0">
-          {/* <Heading>Welcome</Heading> */}
           <SearchPokemon />
+          <ListPokemon />
         </Container>
       </Box>
     </>
