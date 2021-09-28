@@ -1,17 +1,18 @@
+import "@fontsource/press-start-2p/400.css";
+
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import { store } from "./app/store";
 import { Provider } from "react-redux";
-import { ChakraProvider, CSSReset } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import { theme } from "./styles/theme";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ChakraProvider theme={theme}>
-        <CSSReset />
+      <ChakraProvider resetCSS theme={theme}>
         <App />
       </ChakraProvider>
     </Provider>
