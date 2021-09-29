@@ -8,7 +8,7 @@ export default function ListPokemon() {
         Pokemon List
       </Heading>
       <Grid
-        templateColumns="repeat(auto-fit, minmax(200px, 1fr))"
+        templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
         gap={4}
         py="16"
         px={["6", null, null, "28", "44"]}

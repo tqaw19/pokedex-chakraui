@@ -45,22 +45,18 @@ export default function SearchPokemon() {
           and more!
         </FormHelperText>
       </FormControl>
-      <Flex
-        width="1/2"
-        minW={["300px"]}
-        bg="brand.200"
-        h="3"
-        ml={[null, null, "4"]}
-        mt={["7", null]}
-        p="16"
-        rounded="lg"
-        flexDirection="column"
-        justifyContent="center"
-      >
-        <Text fontSize="xs" textAlign="justify">
+      <Box width="1/2" minW="300px" ml={[null, null, "4"]} mt={["7", null]}>
+        <Text
+          fontSize="xs"
+          textAlign="justify"
+          bg="brand.200"
+          px={["6", null, "16"]}
+          py={["5", null, "8"]}
+          rounded="lg"
+        >
           Search for a Pokemon by name or using its National Pokedex number
         </Text>
-      </Flex>
+      </Box>
     </Flex>
   );
 }
