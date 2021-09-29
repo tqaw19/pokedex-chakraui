@@ -2,7 +2,7 @@ import { Box, Container } from "@chakra-ui/layout";
 import React from "react";
 import ListPokemon from "./components/ListPokemon";
 import SearchPokemon from "./components/SearchPokemon";
-import { Counter } from "./features/counter/Counter";
+// import { Counter } from "./features/counter/Counter";
 import AppLayout from "./layout/AppLayout";
 
 function App() {
