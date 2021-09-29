@@ -11,18 +11,34 @@ import { Box, Flex, Text } from "@chakra-ui/layout";
 
 export default function SearchPokemon() {
   return (
-    <Flex bg="brand.300" color="brand.100" p="7" alignItems="center">
-      <FormControl id="name" w="50%">
+    <Flex
+      bg="brand.300"
+      color="brand.100"
+      py="16"
+      px="40"
+      flexDirection={["column", null, null, "row"]}
+      alignItems="center"
+    >
+      <FormControl id="name" width="1/2" minW="300px">
         <FormLabel>Name or Number</FormLabel>
         <Box position="relative">
-          <Input type="text" my="3" placeholder="Type here" />
-          <Search2Icon
-            position="absolute"
-            bottom="6"
-            right="4"
-            _hover={{ color: "#00C6C1", cursor: "pointer" }}
-            zIndex="tooltip"
+          <Input
+            type="text"
+            my="3"
+            placeholder="Type here"
+            borderColor="gray.400"
+            _focus={{ border: "2px solid #00c6c1" }}
           />
+          <Button
+            position="absolute"
+            bottom="3"
+            bg="none"
+            right="0"
+            zIndex="tooltip"
+            _hover={{ color: "#00C6C1" }}
+          >
+            <Search2Icon />
+          </Button>
         </Box>
         <FormHelperText fontSize="smaller" px="4" lineHeight="5">
           Use the Advanced Search to explore Pokemon by type, weakness, Ability,
@@ -30,10 +46,12 @@ export default function SearchPokemon() {
         </FormHelperText>
       </FormControl>
       <Flex
-        w="50%"
+        width="1/2"
+        minW={["300px"]}
         bg="brand.200"
         h="3"
-        ml="4"
+        ml={[null, null, "4"]}
+        mt={["7", null]}
         p="16"
         rounded="lg"
         flexDirection="column"
