@@ -1,5 +1,6 @@
-import { Box, Grid, Heading } from "@chakra-ui/layout";
+import { Grid, Heading } from "@chakra-ui/layout";
 import React from "react";
+import CardPokemon from "./CardPokemon";
 
 export default function ListPokemon() {
   return (
@@ -13,10 +14,7 @@ export default function ListPokemon() {
         py="16"
         px={["6", null, null, "28", "44"]}
       >
-        <Box w="100%" h="10" bg="blue.500" />
-        <Box w="100%" h="10" bg="blue.500" />
-        <Box w="100%" h="10" bg="blue.500" />
-        <Box w="100%" h="10" bg="blue.500" />
+        <CardPokemon />
       </Grid>
     </>
   );
