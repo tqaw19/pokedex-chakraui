@@ -14,6 +14,7 @@ export default function ListPokemon() {
     if (pokemonStatus === "idle") {
       dispatch(fetchInitialPokemonList());
     }
+    // eslint-disable-next-line
   }, []);
 
   return (

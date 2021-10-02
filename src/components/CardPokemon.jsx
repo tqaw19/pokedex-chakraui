@@ -2,21 +2,35 @@ import { Image } from "@chakra-ui/image";
 import { Badge, Box } from "@chakra-ui/layout";
 import React from "react";
 
+import { badgeTypeColor } from "../utils/badgeTypeColor";
+
 export default function CardPokemon(pokemon) {
   const { name, order, sprites, types } = pokemon;
+
   const pokemonImage = sprites.other["official-artwork"]["front_default"];
 
-  const property = {
-    imageUrl:
-      "https://images.unsplash.com/photo-1578010872116-3cc2ab1a8ed3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=825&q=80",
-    imageAlt: "Rear view of modern home with pool",
-    name: "Charizard",
+  const badgePokemonTypes = () => {
+    return types.map((pk) => (
+      <Badge
+        key={pk.type.name}
+        // variant="outline"
+        fontSize="9"
+        borderRadius="full"
+        px="2"
+        py="0.5"
+        mb="1"
+        // colorScheme={badgeTypeColor[pk.type.name]}
+        backgroundColor={badgeTypeColor[pk.type.name]}
+        color="gray.700"
+      >
+        {pk.type.name}
+      </Badge>
+    ));
   };
 
   return (
     // {/**Pokemon Card */}
     <Box
-      // key={pokemon.id}
       maxW="sm"
       borderRadius="lg"
       overflow="hidden"
@@ -45,28 +59,7 @@ export default function CardPokemon(pokemon) {
 
         {/**Pokemon Types goes here */}
         <Box d="flex" flexDirection="column" alignItems="baseline">
-          <Badge
-            // variant="outline"
-            fontSize="9"
-            borderRadius="full"
-            px="2"
-            py="0.5"
-            mb="1"
-            colorScheme="teal"
-          >
-            Grass
-          </Badge>
-          <Badge
-            // variant="outline"
-            fontSize="9"
-            borderRadius="full"
-            px="2"
-            py="0.5"
-            mb="1"
-            colorScheme="orange"
-          >
-            Fire
-          </Badge>
+          {badgePokemonTypes()}
         </Box>
       </Box>
     </Box>

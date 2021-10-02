@@ -17,7 +17,9 @@ export const fetchInitialPokemonList = createAsyncThunk(
 export const pokemonSlice = createSlice({
   name: "pokemon",
   initialState,
-  reducers: {},
+  reducers: {
+    foo: () => {},
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchInitialPokemonList.pending, (state, action) => {
@@ -33,6 +35,6 @@ export const pokemonSlice = createSlice({
   },
 });
 
-export const {} = pokemonSlice.actions;
+export const { foo } = pokemonSlice.actions;
 
 export default pokemonSlice.reducer;
