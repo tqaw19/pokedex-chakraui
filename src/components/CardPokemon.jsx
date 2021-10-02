@@ -2,7 +2,10 @@ import { Image } from "@chakra-ui/image";
 import { Badge, Box } from "@chakra-ui/layout";
 import React from "react";
 
-export default function CardPokemon() {
+export default function CardPokemon(pokemon) {
+  const { name, order, sprites, types } = pokemon;
+  const pokemonImage = sprites.other["official-artwork"]["front_default"];
+
   const property = {
     imageUrl:
       "https://images.unsplash.com/photo-1578010872116-3cc2ab1a8ed3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=825&q=80",
@@ -13,18 +16,19 @@ export default function CardPokemon() {
   return (
     // {/**Pokemon Card */}
     <Box
+      // key={pokemon.id}
       maxW="sm"
       borderRadius="lg"
       overflow="hidden"
       shadow="md"
       bg="gray.100"
     >
-      <Image src={property.imageUrl} alt={property.imageAlt} />
+      <Image src={pokemonImage} alt={pokemonImage} />
 
       <Box p="6">
         {/**Order number */}
         <Box as="span" color="gray.600" fontSize="sm">
-          #45
+          #{order}
         </Box>
 
         {/**Name */}
@@ -36,7 +40,7 @@ export default function CardPokemon() {
           lineHeight="tight"
           isTruncated
         >
-          {property.name}
+          {name}
         </Box>
 
         {/**Pokemon Types goes here */}

@@ -8,12 +8,13 @@ import { useDispatch, useSelector } from "react-redux";
 export default function ListPokemon() {
   const dispatch = useDispatch(fetchInitialPokemonList);
   const pokemonStatus = useSelector((state) => state.pokemon.status);
+  const pokemonData = useSelector((state) => state.pokemon.pokemon);
 
   useEffect(() => {
     if (pokemonStatus === "idle") {
       dispatch(fetchInitialPokemonList());
     }
-  }, [pokemonStatus]);
+  }, []);
 
   return (
     <>
@@ -26,7 +27,9 @@ export default function ListPokemon() {
         py="16"
         px={["6", null, null, "28", "44"]}
       >
-        <CardPokemon />
+        {pokemonData?.map((pokemon) => (
+          <CardPokemon key={pokemon.id} {...pokemon} />
+        ))}
       </Grid>
     </>
   );

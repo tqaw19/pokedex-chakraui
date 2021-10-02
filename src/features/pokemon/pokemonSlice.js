@@ -20,13 +20,14 @@ export const pokemonSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchInitialPokemonList.pending, (state) => {
+      .addCase(fetchInitialPokemonList.pending, (state, action) => {
         state.status = "loading";
       })
-      .addCase(fetchInitialPokemonList.fulfilled, (state) => {
+      .addCase(fetchInitialPokemonList.fulfilled, (state, action) => {
         state.status = "idle";
+        state.pokemon = state.pokemon.concat(action.payload);
       })
-      .addCase(fetchInitialPokemonList.rejected, (state) => {
+      .addCase(fetchInitialPokemonList.rejected, (state, action) => {
         state.status = "failed";
       });
   },
