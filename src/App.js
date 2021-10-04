@@ -1,26 +1,21 @@
-import { Box, Container } from "@chakra-ui/layout";
 import React from "react";
-import ListPokemon from "./components/ListPokemon";
-import SearchPokemon from "./components/SearchPokemon";
-// import { Counter } from "./features/counter/Counter";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AppLayout from "./layout/AppLayout";
+import DetailPokemon from "./screens/DetailPokemon";
+import { Home } from "./screens/Home";
+
+// import { Counter } from "./features/counter/Counter";
 
 function App() {
   return (
     <>
       <AppLayout />
-      <Box
-        bg="brand.300"
-        minH="100vh"
-        d="flex"
-        justifyContent="center"
-        marginBottom="0"
-      >
-        <Container bg="brand.800" maxW="container.xl" p="0">
-          <SearchPokemon />
-          <ListPokemon />
-        </Container>
-      </Box>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/details" component={DetailPokemon} />
+        </Switch>
+      </Router>
     </>
   );
 }
