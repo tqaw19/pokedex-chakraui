@@ -14,7 +14,7 @@ export async function fetchPokemon() {
   }
 }
 
-// Fetch only one pokemon
+// Fetch one pokemon
 export async function fetchOnePokemon(id) {
   try {
     const endPoint = await client.get(

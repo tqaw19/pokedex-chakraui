@@ -10,19 +10,21 @@ import {
 } from "@chakra-ui/layout";
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { fetchOnePokemon } from "../features/pokemon/pokemonAPI";
 import { useSelector, useDispatch } from "react-redux";
+import { fetchOnePokemon } from "../features/pokemon/pokemonSlice";
 
 export default function DetailPokemon() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const pokemonData = useSelector((state) => state.pokemonDetails);
+  const pokemonData = useSelector((state) => state.pokemon.pokemonDetails);
 
   useEffect(() => {
     dispatch(fetchOnePokemon(id));
+    // eslint-disable-next-line
   }, []);
 
   console.log(pokemonData);
+  // console.log(id);
 
   return (
     <Box
@@ -57,7 +59,7 @@ export default function DetailPokemon() {
               fontSize="sm"
               color="white"
             >
-              <Text m="4">
+              <Text as="span" m="4">
                 Height{" "}
                 <Text mb="4" color="black">
                   2 04
@@ -72,7 +74,7 @@ export default function DetailPokemon() {
                 </Text>
               </Text>
               <Spacer />
-              <Text m="4" mr="16">
+              <Text as="span" m="4" mr="16">
                 Category{" "}
                 <Text mb="4" color="black">
                   Seed

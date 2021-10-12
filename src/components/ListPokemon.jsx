@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function ListPokemon() {
   const dispatch = useDispatch();
-  const pokemonStatus = useSelector((state) => state.pokemon.status);
+  // const pokemonStatus = useSelector((state) => state.pokemon.status);
   const pokemonData = useSelector((state) => state.pokemon.pokemon);
 
   useEffect(() => {
