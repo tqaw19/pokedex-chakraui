@@ -18,6 +18,10 @@ export default function DetailPokemon() {
   const dispatch = useDispatch();
   const pokemonData = useSelector((state) => state.pokemon.pokemonDetails);
 
+  const { name, order, sprites } = pokemonData;
+
+  const pokemonImage = sprites?.other["official-artwork"]["front_default"];
+
   useEffect(() => {
     dispatch(fetchOnePokemonDetail(id));
     // eslint-disable-next-line
@@ -37,12 +41,12 @@ export default function DetailPokemon() {
       <Container bg="brand.800" maxW="container.xl" p="0">
         {/** Pokemon Name and Order No. */}
         <Heading size="lg" mt="8" textAlign="center">
-          Pokemon Name <Text display="inline">#34</Text>
+          {name} <Text display="inline">#{order}</Text>
         </Heading>
 
         <Flex mt="16" px="44">
           <Box width="50%" display="flex" justifyContent="center">
-            <Image src="https://images.unsplash.com/photo-1561994508-07f91d13a9ff?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGJhdG1hbnxlbnwwfDJ8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" />
+            <Image src={pokemonImage} borderRadius="lg" background="gray.200" />
           </Box>
 
           {/** Short Descrioption */}
@@ -53,7 +57,7 @@ export default function DetailPokemon() {
 
             {/** Pokemon Attributes */}
             <Flex
-              bg="blue.200"
+              bg="blue.400"
               mt="4"
               borderRadius="lg"
               fontSize="sm"

@@ -3,7 +3,7 @@ import { fetchPokemon, fetchOnePokemon } from "./pokemonAPI";
 
 const initialState = {
   pokemon: [],
-  pokemonDetails: [],
+  pokemonDetails: {},
   status: "idle",
 };
 
@@ -46,8 +46,8 @@ export const pokemonSlice = createSlice({
       })
       .addCase(fetchOnePokemonDetail.fulfilled, (state, action) => {
         state.status = "idle";
-        state.pokemonDetails = [];
-        state.pokemonDetails.push(action.payload);
+        state.pokemonDetails = {};
+        state.pokemonDetails = action.payload;
       })
       .addCase(fetchOnePokemonDetail.rejected, (state, action) => {
         state.status = "failed";
