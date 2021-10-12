@@ -6,14 +6,14 @@ import { fetchInitialPokemonList } from "../features/pokemon/pokemonSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function ListPokemon() {
-  const dispatch = useDispatch(fetchInitialPokemonList);
+  const dispatch = useDispatch();
   const pokemonStatus = useSelector((state) => state.pokemon.status);
   const pokemonData = useSelector((state) => state.pokemon.pokemon);
 
   useEffect(() => {
-    if (pokemonStatus === "idle") {
-      dispatch(fetchInitialPokemonList());
-    }
+    // if (pokemonStatus === "idle") {
+    dispatch(fetchInitialPokemonList());
+    // }
     // eslint-disable-next-line
   }, []);
 

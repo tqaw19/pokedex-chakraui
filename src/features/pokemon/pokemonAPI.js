@@ -10,6 +10,18 @@ export async function fetchPokemon() {
     const pokeData = await Promise.all(endPointResponse.map((res) => res.data));
     return pokeData;
   } catch (error) {
-    console.log(error);
+    throw new Error();
   }
+}
+
+// Fetch only one pokemon
+export async function fetchOnePokemon(id) {
+  try {
+    const endPoint = await client.get(
+      `https://pokeapi.co/api/v2/pokemon/${id}`
+    );
+    const endPointResponse = await endPoint.data;
+    return endPointResponse;
+  } catch (error) {}
+  throw new Error();
 }

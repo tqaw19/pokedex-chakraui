@@ -8,9 +8,22 @@ import {
   Spacer,
   Text,
 } from "@chakra-ui/layout";
-import React from "react";
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { fetchOnePokemon } from "../features/pokemon/pokemonAPI";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function DetailPokemon() {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const pokemonData = useSelector((state) => state.pokemonDetails);
+
+  useEffect(() => {
+    dispatch(fetchOnePokemon(id));
+  }, []);
+
+  console.log(pokemonData);
+
   return (
     <Box
       bg="brand.300"

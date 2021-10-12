@@ -19,7 +19,6 @@ export default function CardPokemon(pokemon) {
         px="2"
         py="0.5"
         mb="1"
-        // colorScheme={badgeTypeColor[pk.type.name]}
         backgroundColor={badgeTypeColor[pk.type.name]}
         color="gray.700"
       >
