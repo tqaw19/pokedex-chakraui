@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchPokemon } from "./pokemonAPI";
+import { fetchPokemon, fetchOnePokemon } from "./pokemonAPI";
 
 const initialState = {
   pokemon: [],
@@ -15,7 +15,7 @@ export const fetchInitialPokemonList = createAsyncThunk(
   }
 );
 
-export const fetchOnePokemon = createAsyncThunk(
+export const fetchOnePokemonDetail = createAsyncThunk(
   "pokemon/fetchOnePokemon",
   async (id) => {
     const response = await fetchOnePokemon(id);
@@ -41,15 +41,15 @@ export const pokemonSlice = createSlice({
       .addCase(fetchInitialPokemonList.rejected, (state, action) => {
         state.status = "failed";
       })
-      .addCase(fetchOnePokemon.pending, (state, action) => {
+      .addCase(fetchOnePokemonDetail.pending, (state, action) => {
         state.status = "loading";
       })
-      .addCase(fetchOnePokemon.fulfilled, (state, action) => {
+      .addCase(fetchOnePokemonDetail.fulfilled, (state, action) => {
         state.status = "idle";
         state.pokemonDetails = [];
         state.pokemonDetails.push(action.payload);
       })
-      .addCase(fetchOnePokemon.rejected, (state, action) => {
+      .addCase(fetchOnePokemonDetail.rejected, (state, action) => {
         state.status = "failed";
       });
   },

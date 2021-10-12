@@ -11,7 +11,7 @@ import {
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchOnePokemon } from "../features/pokemon/pokemonSlice";
+import { fetchOnePokemonDetail } from "../features/pokemon/pokemonSlice";
 
 export default function DetailPokemon() {
   const { id } = useParams();
@@ -19,7 +19,7 @@ export default function DetailPokemon() {
   const pokemonData = useSelector((state) => state.pokemon.pokemonDetails);
 
   useEffect(() => {
-    dispatch(fetchOnePokemon(id));
+    dispatch(fetchOnePokemonDetail(id));
     // eslint-disable-next-line
   }, []);
 
