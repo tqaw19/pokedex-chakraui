@@ -18,9 +18,10 @@ export default function DetailPokemon() {
   const dispatch = useDispatch();
   const pokemonData = useSelector((state) => state.pokemon.pokemonDetails);
 
-  const { name, order, sprites } = pokemonData;
+  const [{ name, order, sprites }, { flavor_text_entries }] = pokemonData;
 
   const pokemonImage = sprites?.other["official-artwork"]["front_default"];
+  const pokemonDescription = flavor_text_entries[1]?.["flavor_text"];
 
   useEffect(() => {
     dispatch(fetchOnePokemonDetail(id));
@@ -28,6 +29,7 @@ export default function DetailPokemon() {
   }, []);
 
   console.log(pokemonData);
+  console.log(flavor_text_entries);
   // console.log(id);
 
   return (
@@ -41,19 +43,22 @@ export default function DetailPokemon() {
       <Container bg="brand.800" maxW="container.xl" p="0">
         {/** Pokemon Name and Order No. */}
         <Heading size="lg" mt="8" textAlign="center">
-          {name} <Text display="inline">#{order}</Text>
+          {name?.toUpperCase()} <Text display="inline">#{order}</Text>
         </Heading>
 
         <Flex mt="16" px="44">
           <Box width="50%" display="flex" justifyContent="center">
-            <Image src={pokemonImage} borderRadius="lg" background="gray.200" />
+            <Image
+              boxSize="fit-content"
+              src={pokemonImage}
+              borderRadius="lg"
+              background="gray.200"
+            />
           </Box>
 
           {/** Short Descrioption */}
           <Box width="50%" p="4">
-            <Text fontSize="sm">
-              This a medium size description about a pokemon.
-            </Text>
+            <Text fontSize="sm">{pokemonDescription}</Text>
 
             {/** Pokemon Attributes */}
             <Flex

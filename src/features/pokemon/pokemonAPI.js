@@ -7,6 +7,7 @@ export async function fetchPokemon() {
     const endPointResponse = await Promise.all(
       endPointList.data.results.map((link) => client.get(link.url))
     );
+
     const pokeData = await Promise.all(endPointResponse.map((res) => res.data));
     return pokeData;
   } catch (error) {
@@ -17,11 +18,13 @@ export async function fetchPokemon() {
 // Fetch one pokemon
 export async function fetchOnePokemon(id) {
   try {
-    const endPoint = await client.get(
-      `https://pokeapi.co/api/v2/pokemon/${id}`
+    const endPoint = await Promise.all(
+      [`pokemon/${id}`, `pokemon-species/${id}`].map((link) => client.get(link))
     );
-    const endPointResponse = await endPoint.data;
+
+    const endPointResponse = await Promise.all(endPoint.map((res) => res.data));
     return endPointResponse;
-  } catch (error) {}
-  throw new Error();
+  } catch (error) {
+    throw new Error();
+  }
 }
