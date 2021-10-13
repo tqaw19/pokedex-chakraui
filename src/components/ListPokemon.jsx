@@ -4,11 +4,13 @@ import CardPokemon from "./CardPokemon";
 
 import { fetchInitialPokemonList } from "../features/pokemon/pokemonSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { Spinner } from "@chakra-ui/spinner";
 
 export default function ListPokemon() {
   const dispatch = useDispatch();
   // const pokemonStatus = useSelector((state) => state.pokemon.status);
   const pokemonData = useSelector((state) => state.pokemon.pokemon);
+  const status = useSelector((state) => state.pokemon.status);
 
   useEffect(() => {
     // if (pokemonStatus === "idle") {
@@ -16,6 +18,10 @@ export default function ListPokemon() {
     // }
     // eslint-disable-next-line
   }, []);
+
+  if (status === "loading") {
+    return <Spinner />;
+  }
 
   return (
     <>
@@ -28,6 +34,14 @@ export default function ListPokemon() {
         py="16"
         px={["6", null, null, "28", "44"]}
       >
+        {
+          <Spinner
+            label="Loading"
+            thickness="5px"
+            size="lg"
+            color="brand.300"
+          />
+        }
         {pokemonData?.map((pokemon) => (
           <CardPokemon key={pokemon.id} {...pokemon} />
         ))}

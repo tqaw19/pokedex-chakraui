@@ -12,11 +12,13 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchOnePokemonDetail } from "../features/pokemon/pokemonSlice";
+import { Spinner } from "@chakra-ui/spinner";
 
 export default function DetailPokemon() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const pokemonData = useSelector((state) => state.pokemon.pokemonDetails);
+  const status = useSelector((state) => state.pokemon.status);
 
   const [{ name, order, sprites }, { flavor_text_entries }] = pokemonData;
 
@@ -30,7 +32,10 @@ export default function DetailPokemon() {
 
   console.log(pokemonData);
   console.log(flavor_text_entries);
-  // console.log(id);
+
+  if (status === "loading") {
+    return <Spinner />;
+  }
 
   return (
     <Box
@@ -51,6 +56,7 @@ export default function DetailPokemon() {
             <Image
               boxSize="fit-content"
               src={pokemonImage}
+              alt={name}
               borderRadius="lg"
               background="gray.200"
             />
