@@ -34,7 +34,7 @@ export default function CardPokemon(pokemon) {
       borderRadius="lg"
       overflow="hidden"
       shadow="md"
-      bg="gray.100"
+      bg="gray.200"
     >
       <Image src={pokemonImage} alt={pokemonImage} />
 

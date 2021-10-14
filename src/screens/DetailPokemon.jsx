@@ -21,11 +21,11 @@ export default function DetailPokemon({ match }) {
   const status = useSelector((state) => state.pokemon.status);
 
   const { name, order, sprites } = pokemonData[0] ?? [];
-  // const { flavor_text_entries } = pokemonData[1] ?? [];
+  const { flavor_text_entries } = pokemonData[1] ?? [];
   // const [{ name, order, sprites }, { flavor_text_entries }] = pokemonData ?? [];
 
   const pokemonImage = sprites?.other["official-artwork"]["front_default"];
-  // const pokemonDescription = flavor_text_entries[1]?.["flavor_text"];
+  const pokemonDescription = flavor_text_entries?.[1]["flavor_text"];
 
   useEffect(() => {
     dispatch(fetchOnePokemonDetail(id));
@@ -33,7 +33,7 @@ export default function DetailPokemon({ match }) {
   }, []);
 
   console.log(pokemonData[1]);
-  console.log(id);
+  // console.log(id);
 
   if (status === "loading") {
     return <Spinner />;
@@ -60,13 +60,14 @@ export default function DetailPokemon({ match }) {
               src={pokemonImage}
               alt={name}
               borderRadius="lg"
+              shadow="md"
               background="gray.200"
             />
           </Box>
 
           {/** Short Descrioption */}
           <Box width="50%" p="4">
-            <Text fontSize="sm">{"pokemonDescription"}</Text>
+            <Text fontSize="sm">{pokemonDescription}</Text>
 
             {/** Pokemon Attributes */}
             <Flex
