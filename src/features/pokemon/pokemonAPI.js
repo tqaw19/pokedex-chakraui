@@ -22,7 +22,8 @@ export async function fetchOnePokemon(id) {
       [`pokemon/${id}`, `pokemon-species/${id}`].map((link) => client.get(link))
     );
 
-    const endPointResponse = await Promise.all(endPoint.map((res) => res.data));
+    // const endPointResponse = await Promise.all(endPoint.map((res) => res.data));
+    const endPointResponse = await endPoint[0].data;
     return endPointResponse;
   } catch (error) {
     throw new Error();

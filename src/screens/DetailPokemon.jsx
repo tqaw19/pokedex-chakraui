@@ -14,7 +14,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchOnePokemonDetail } from "../features/pokemon/pokemonSlice";
 import { Spinner } from "@chakra-ui/spinner";
 
-export default function DetailPokemon() {
+export default function DetailPokemon({ match }) {
   const { id } = useParams();
   const dispatch = useDispatch();
   const pokemonData = useSelector((state) => state.pokemon.pokemonDetails);
@@ -31,7 +31,7 @@ export default function DetailPokemon() {
   }, []);
 
   console.log(pokemonData);
-  console.log(flavor_text_entries);
+  console.log(id);
 
   if (status === "loading") {
     return <Spinner />;
