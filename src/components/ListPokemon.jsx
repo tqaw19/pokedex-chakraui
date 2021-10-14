@@ -34,14 +34,6 @@ export default function ListPokemon() {
         py="16"
         px={["6", null, null, "28", "44"]}
       >
-        {
-          <Spinner
-            label="Loading"
-            thickness="5px"
-            size="lg"
-            color="brand.300"
-          />
-        }
         {pokemonData?.map((pokemon) => (
           <CardPokemon key={pokemon.id} {...pokemon} />
         ))}

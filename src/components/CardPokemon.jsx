@@ -1,31 +1,13 @@
 import { Image } from "@chakra-ui/image";
-import { Badge, Box } from "@chakra-ui/layout";
+import { Box } from "@chakra-ui/layout";
 import React from "react";
 
-import { badgeTypeColor } from "../utils/badgeTypeColor";
+import BadgePokemon from "./BadgePokemon";
 
 export default function CardPokemon(pokemon) {
   const { name, order, sprites, types } = pokemon;
 
   const pokemonImage = sprites.other["official-artwork"]["front_default"];
-
-  const badgePokemonTypes = () => {
-    return types.map((pk) => (
-      <Badge
-        key={pk.type.name}
-        // variant="outline"
-        fontSize="9"
-        borderRadius="full"
-        px="2"
-        py="0.5"
-        mb="1"
-        backgroundColor={badgeTypeColor[pk.type.name]}
-        color="gray.700"
-      >
-        {pk.type.name}
-      </Badge>
-    ));
-  };
 
   return (
     // {/**Pokemon Card */}
@@ -58,7 +40,7 @@ export default function CardPokemon(pokemon) {
 
         {/**Pokemon Types goes here */}
         <Box d="flex" flexDirection="column" alignItems="baseline">
-          {badgePokemonTypes()}
+          <BadgePokemon types={types} />
         </Box>
       </Box>
     </Box>

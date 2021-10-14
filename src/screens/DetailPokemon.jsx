@@ -14,13 +14,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchOnePokemonDetail } from "../features/pokemon/pokemonSlice";
 import { Spinner } from "@chakra-ui/spinner";
 
-export default function DetailPokemon({ match }) {
+import BadgePokemon from "../components/BadgePokemon";
+
+export default function DetailPokemon() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const pokemonData = useSelector((state) => state.pokemon.pokemonDetails);
   const status = useSelector((state) => state.pokemon.status);
 
-  const { name, order, sprites } = pokemonData[0] ?? [];
+  const { name, order, sprites, types } = pokemonData[0] ?? [];
   const { flavor_text_entries } = pokemonData[1] ?? [];
   // const [{ name, order, sprites }, { flavor_text_entries }] = pokemonData ?? [];
 
@@ -32,7 +34,7 @@ export default function DetailPokemon({ match }) {
     // eslint-disable-next-line
   }, []);
 
-  console.log(pokemonData[1]);
+  // console.log(pokemonData[1]);
   // console.log(id);
 
   if (status === "loading") {
@@ -97,7 +99,7 @@ export default function DetailPokemon({ match }) {
                 <Text mb="4" color="black">
                   Seed
                 </Text>
-                Abilties{" "}
+                Abilities{" "}
                 <Text mb="4" color="black">
                   Overgrow
                 </Text>
@@ -106,13 +108,8 @@ export default function DetailPokemon({ match }) {
 
             {/** Type */}
             <Box mt="4">
-              <Text>Type</Text>
-              <Badge borderRadius="full" px="2" py="0.5" mb="1">
-                Grass
-              </Badge>
-              <Badge borderRadius="full" px="2" py="0.5" mb="1" ml="2">
-                Fire
-              </Badge>
+              <Text mb="1">Type</Text>
+              <BadgePokemon types={types ?? []} />
             </Box>
 
             {/** Weaknesses */}
