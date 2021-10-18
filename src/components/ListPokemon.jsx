@@ -13,9 +13,9 @@ export default function ListPokemon() {
   const status = useSelector((state) => state.pokemon.status);
 
   useEffect(() => {
-    // if (pokemonStatus === "idle") {
-    dispatch(fetchInitialPokemonList());
-    // }
+    if (pokemonData.length === 0) {
+      dispatch(fetchInitialPokemonList());
+    }
     // eslint-disable-next-line
   }, []);
 
