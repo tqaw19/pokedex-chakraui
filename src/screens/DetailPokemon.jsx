@@ -9,15 +9,14 @@ import {
   Text,
 } from "@chakra-ui/layout";
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchOnePokemonDetail } from "../features/pokemon/pokemonSlice";
 import { Spinner } from "@chakra-ui/spinner";
 
 import BadgePokemon from "../components/BadgePokemon";
 
-export default function DetailPokemon() {
-  const { id } = useParams();
+export default function DetailPokemon({ match }) {
+  const { id } = match.params;
   const dispatch = useDispatch();
   const pokemonData = useSelector((state) => state.pokemon.pokemonDetails);
   const status = useSelector((state) => state.pokemon.status);
