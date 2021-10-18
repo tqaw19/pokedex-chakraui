@@ -47,7 +47,7 @@ export const pokemonSlice = createSlice({
       })
       .addCase(fetchOnePokemonDetail.fulfilled, (state, action) => {
         state.status = "idle";
-        // state.pokemonDetails = [];
+        state.pokemonDetails = [];
         state.pokemonDetails.push(...action.payload);
       })
       .addCase(fetchOnePokemonDetail.rejected, (state, action) => {
