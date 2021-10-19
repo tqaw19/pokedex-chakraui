@@ -43,10 +43,18 @@ export default function DetailPokemon({ match }) {
         {name?.toUpperCase()} <Text display="inline">#{order}</Text>
       </Heading>
 
-      <Flex mt="16" px="44">
-        <Box width="50%" display="flex" justifyContent="center">
+      <Flex
+        mt="16"
+        px={[null, null, null, "44"]}
+        flexDirection={["column", null, "row"]}
+      >
+        <Box
+          width={["full", null, "50%"]}
+          display="flex"
+          justifyContent="center"
+        >
           <Image
-            boxSize="fit-content"
+            // boxSize="fit-content"
             src={pokemonImage}
             alt={name}
             borderRadius="lg"
@@ -56,7 +64,7 @@ export default function DetailPokemon({ match }) {
         </Box>
 
         {/** Short Descrioption */}
-        <Box width="50%" p="4">
+        <Box width={["full", null, "50%"]} p={["10", null, null, "4"]}>
           <Text fontSize="sm">{pokemonDescription}</Text>
 
           {/** Pokemon Attributes */}
