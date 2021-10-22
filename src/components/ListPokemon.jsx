@@ -1,4 +1,4 @@
-import { Grid, Heading } from "@chakra-ui/layout";
+import { Flex, Grid, Heading, Text } from "@chakra-ui/layout";
 import React, { useEffect } from "react";
 import CardPokemon from "./CardPokemon";
 
@@ -19,25 +19,34 @@ export default function ListPokemon() {
     // eslint-disable-next-line
   }, []);
 
-  if (status === "loading") {
-    return <Spinner />;
-  }
+  const SpinnerComponent = () => (
+    <Flex align="center" direction="column" m="36">
+      <Spinner />
+      <Text m="4" fontSize="smaller">
+        Loading
+      </Text>
+    </Flex>
+  );
 
   return (
     <>
       <Heading size="lg" textAlign="center" mt="9">
         Pokemon List
       </Heading>
-      <Grid
-        templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
-        gap={4}
-        py="16"
-        px={["6", null, null, "28", "44"]}
-      >
-        {pokemonData?.map((pokemon) => (
-          <CardPokemon key={pokemon.id} {...pokemon} />
-        ))}
-      </Grid>
+      {status === "loading" ? (
+        <SpinnerComponent />
+      ) : (
+        <Grid
+          templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
+          gap={4}
+          py="16"
+          px={["6", null, null, "28", "44"]}
+        >
+          {pokemonData?.map((pokemon) => (
+            <CardPokemon key={pokemon.id} {...pokemon} />
+          ))}
+        </Grid>
+      )}
     </>
   );
 }
