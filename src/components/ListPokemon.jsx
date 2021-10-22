@@ -1,10 +1,10 @@
-import { Flex, Grid, Heading, Text } from "@chakra-ui/layout";
 import React, { useEffect } from "react";
-import CardPokemon from "./CardPokemon";
-
-import { fetchInitialPokemonList } from "../features/pokemon/pokemonSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { Spinner } from "@chakra-ui/spinner";
+import { Grid, Heading } from "@chakra-ui/layout";
+
+import CardPokemon from "./CardPokemon";
+import { fetchInitialPokemonList } from "../features/pokemon/pokemonSlice";
+import SpinnerComponent from "./SpinnerComponent";
 
 export default function ListPokemon() {
   const dispatch = useDispatch();
@@ -18,15 +18,6 @@ export default function ListPokemon() {
     }
     // eslint-disable-next-line
   }, []);
-
-  const SpinnerComponent = () => (
-    <Flex align="center" direction="column" m="36">
-      <Spinner />
-      <Text m="4" fontSize="smaller">
-        Loading
-      </Text>
-    </Flex>
-  );
 
   return (
     <>

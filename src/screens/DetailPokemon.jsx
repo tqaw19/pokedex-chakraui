@@ -1,3 +1,5 @@
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Image } from "@chakra-ui/image";
 import {
   Badge,
@@ -8,12 +10,10 @@ import {
   Spacer,
   Text,
 } from "@chakra-ui/layout";
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchOnePokemonDetail } from "../features/pokemon/pokemonSlice";
-import { Spinner } from "@chakra-ui/spinner";
 
+import { fetchOnePokemonDetail } from "../features/pokemon/pokemonSlice";
 import BadgePokemon from "../components/BadgePokemon";
+import SpinnerComponent from "../components/SpinnerComponent";
 
 export default function DetailPokemon({ match }) {
   const { id } = match.params;
@@ -135,7 +135,7 @@ export default function DetailPokemon({ match }) {
       marginBottom="0"
     >
       <Container bg="brand.800" maxW="container.xl" p="0">
-        {status === "loading" ? <Spinner /> : <PokemonDataRendered />}
+        {status === "loading" ? <SpinnerComponent /> : <PokemonDataRendered />}
       </Container>
     </Box>
   );
