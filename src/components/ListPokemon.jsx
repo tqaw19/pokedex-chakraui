@@ -18,7 +18,6 @@ export default function ListPokemon() {
   const offsetValue = useSelector((state) => state.pokemon.offset);
 
   useEffect(() => {
-    console.log(offsetValue);
     if (pokemonData.length !== offsetValue) {
       dispatch(fetchInitialPokemonList(offsetValue));
     }
