@@ -9,8 +9,8 @@ export async function fetchPokemon(offsetValue) {
     const endPointResponse = await Promise.all(
       endPointList.data.results.map((link) => client.get(link.url))
     );
-
     const pokeData = await Promise.all(endPointResponse.map((res) => res.data));
+
     return pokeData;
   } catch (error) {
     throw new Error();
@@ -25,8 +25,18 @@ export async function fetchOnePokemon(id) {
     );
 
     const endPointResponse = await Promise.all(endPoint.map((res) => res.data));
-    // const endPointResponse = await endPoint[0].data;
-    return endPointResponse;
+
+    const evolutionsAndWeaknesses = await Promise.all(
+      [
+        endPointResponse[1]["evolution_chain"]["url"],
+        endPointResponse[0].types[0]["type"]["url"],
+      ].map((link) => client(link))
+    );
+    const evolutionsAndWeaknessesResponse = await Promise.all(
+      evolutionsAndWeaknesses.map((res) => res.data)
+    );
+
+    return [...endPointResponse, ...evolutionsAndWeaknessesResponse];
   } catch (error) {
     throw new Error();
   }
