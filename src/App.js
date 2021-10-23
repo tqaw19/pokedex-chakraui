@@ -11,8 +11,8 @@ import { MyPokemons } from "./screens/MyPokemons";
 function App() {
   return (
     <>
-      <AppLayout />
       <Router>
+        <AppLayout />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/mypokemons" component={MyPokemons} />
