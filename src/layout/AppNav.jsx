@@ -1,7 +1,13 @@
-import { Box, ListItem, Text, UnorderedList } from "@chakra-ui/layout";
 import React from "react";
+import { Box, ListItem, Text, UnorderedList } from "@chakra-ui/layout";
+import { Link } from "react-router-dom";
 
 export default function AppNav() {
+  const routes = [
+    { name: "My Pokemons", route: "/mypokemons" },
+    { name: "Categories", route: "/categories" },
+  ];
+
   return (
     <Box
       sx={{ position: "sticky", top: 0, zIndex: 9 }}
@@ -13,7 +19,11 @@ export default function AppNav() {
       px="9"
       h="16"
     >
-      <Text flex="1">PokedexApp</Text>
+      <Box flex="1">
+        <Link to="/">
+          <Text>PokedexApp</Text>
+        </Link>
+      </Box>
       <UnorderedList
         display={["none", null, "flex"]}
         flexDir="row"
@@ -23,11 +33,12 @@ export default function AppNav() {
           {/* This is not showing */}
           <Box display={["block", "none"]}> - </Box>
         </Box>
-        <ListItem m="6">Home</ListItem>
-        <ListItem m="6">My Pokemons</ListItem>
-        <ListItem my="6" ml="6">
-          Categories
-        </ListItem>
+
+        {routes.map((route) => (
+          <Link to={route.route} key={route.name}>
+            <ListItem m="6">{route.name}</ListItem>
+          </Link>
+        ))}
       </UnorderedList>
     </Box>
   );
