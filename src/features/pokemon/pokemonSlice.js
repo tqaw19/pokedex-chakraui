@@ -5,12 +5,13 @@ const initialState = {
   pokemon: [],
   pokemonDetails: [],
   status: "idle",
+  offset: 10,
 };
 
 export const fetchInitialPokemonList = createAsyncThunk(
   "pokemon/fetchPokemon",
-  async () => {
-    const response = await fetchPokemon();
+  async (offsetValue) => {
+    const response = await fetchPokemon(offsetValue);
     return response;
   }
 );
@@ -28,6 +29,9 @@ export const pokemonSlice = createSlice({
   initialState,
   reducers: {
     foo: () => {},
+    nextOffset: (state) => {
+      state.offset += 10;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -56,6 +60,6 @@ export const pokemonSlice = createSlice({
   },
 });
 
-export const { foo } = pokemonSlice.actions;
+export const { foo, nextOffset } = pokemonSlice.actions;
 
 export default pokemonSlice.reducer;
