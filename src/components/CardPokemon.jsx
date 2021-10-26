@@ -39,7 +39,7 @@ export default function CardPokemon(pokemon) {
           </Box>
           {/**Pokemon Types goes here */}
           <Box d="flex" flexDirection="column" alignItems="baseline">
-            <BadgePokemon types={types} />
+            <BadgePokemon types={types?.map((pk) => pk.type.name)} />
           </Box>
         </Box>
       </Box>
