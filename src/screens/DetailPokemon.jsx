@@ -1,15 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Image } from "@chakra-ui/image";
-import {
-  Badge,
-  Box,
-  Container,
-  Flex,
-  Heading,
-  Spacer,
-  Text,
-} from "@chakra-ui/layout";
+import { Box, Container, Flex, Heading, Spacer, Text } from "@chakra-ui/layout";
 
 import { fetchOnePokemonDetail } from "../features/pokemon/pokemonSlice";
 import BadgePokemon from "../components/BadgePokemon";
@@ -31,7 +23,7 @@ export default function DetailPokemon({ match }) {
   const pokemonImage = sprites?.other["official-artwork"]["front_default"];
   const pokemonDescription = flavor_text_entries?.[1]["flavor_text"];
 
-  console.log(damage_relations);
+  // console.log(damage_relations);
   useEffect(() => {
     dispatch(fetchOnePokemonDetail(id));
     // eslint-disable-next-line
