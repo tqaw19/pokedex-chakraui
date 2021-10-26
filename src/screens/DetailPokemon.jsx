@@ -14,6 +14,7 @@ import {
 import { fetchOnePokemonDetail } from "../features/pokemon/pokemonSlice";
 import BadgePokemon from "../components/BadgePokemon";
 import SpinnerComponent from "../components/SpinnerComponent";
+import { multiplierDamageFrom } from "../utils/multiplierRelations";
 
 export default function DetailPokemon({ match }) {
   const { id } = match.params;
@@ -23,11 +24,14 @@ export default function DetailPokemon({ match }) {
 
   const { name, order, sprites, types } = pokemonData[0] ?? [];
   const { flavor_text_entries } = pokemonData[1] ?? [];
+  const { damage_relations } = pokemonData[3] ?? [];
+
   // const [{ name, order, sprites }, { flavor_text_entries }] = pokemonData ?? [];
 
   const pokemonImage = sprites?.other["official-artwork"]["front_default"];
   const pokemonDescription = flavor_text_entries?.[1]["flavor_text"];
 
+  console.log(damage_relations);
   useEffect(() => {
     dispatch(fetchOnePokemonDetail(id));
     // eslint-disable-next-line
@@ -35,44 +39,51 @@ export default function DetailPokemon({ match }) {
 
   // console.log(pokemonData[1]);
   // console.log(id);
+  const weaknesses = Object.entries(damage_relations ?? {}).map(
+    ([multiplier, value]) => {
+      return (
+        <div key={multiplier}>
+          {multiplierDamageFrom[multiplier]} -{" "}
+          <BadgePokemon types={value.map((pk) => pk.name)} />
+        </div>
+      );
+    }
+  );
 
   const PokemonDataRendered = () => (
     <>
-      {/** Pokemon Name and Order No. */}
-      <Heading size="lg" mt="8" textAlign="center">
-        {name?.toUpperCase()} <Text display="inline">#{order}</Text>
-      </Heading>
-
       <Flex
-        mt="16"
+        mt={["4", null, null, "16"]}
         px={[null, null, null, "44"]}
         flexDirection={["column", null, "row"]}
       >
-        <Box
-          width={["full", null, "50%"]}
-          display="flex"
-          justifyContent="center"
-        >
+        <Box width={["full", null, "50%"]} p="4">
+          {/**Pokemon Official artwork image */}
           <Image
-            // boxSize="fit-content"
             src={pokemonImage}
             alt={name}
+            mx="auto"
             borderRadius="lg"
             shadow="md"
             background="gray.200"
           />
         </Box>
 
-        {/** Short Descrioption */}
         <Box width={["full", null, "50%"]} p={["10", null, null, "4"]}>
-          <Text fontSize="sm">{pokemonDescription}</Text>
+          {/** Pokemon Name and Order No. */}
+          <Heading size="md" mb="8" textAlign="center">
+            {name?.toUpperCase()} <Text display="inline">#{order}</Text>
+          </Heading>
+
+          {/** Short Descrioption */}
+          <Text fontSize="smaller">{pokemonDescription}</Text>
 
           {/** Pokemon Attributes */}
           <Flex
             bg="blue.400"
             mt="4"
             borderRadius="lg"
-            fontSize="sm"
+            fontSize="smaller"
             color="white"
           >
             <Text as="span" m="4">
@@ -105,21 +116,14 @@ export default function DetailPokemon({ match }) {
           {/** Type */}
           <Box mt="4">
             <Text mb="1">Type</Text>
-            <BadgePokemon types={types ?? []} />
+            {/* <BadgePokemon types={types ?? []} /> */}
+            <BadgePokemon types={types?.map((pk) => pk.type.name) ?? []} />
           </Box>
 
           {/** Weaknesses */}
           <Box mt="4">
-            <Text>Weaknesses</Text>
-            <Badge borderRadius="full" px="2" py="0.5" mb="1">
-              Ghost
-            </Badge>
-            <Badge borderRadius="full" px="2" py="0.5" mb="1" ml="2">
-              Water
-            </Badge>
-            <Badge borderRadius="full" px="2" py="0.5" mb="1" ml="2">
-              Physic
-            </Badge>
+            <Text mb="1">Multiplier</Text>
+            {weaknesses}
           </Box>
         </Box>
       </Flex>
