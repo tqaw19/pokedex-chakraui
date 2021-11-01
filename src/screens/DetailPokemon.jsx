@@ -1,18 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Image } from "@chakra-ui/image";
 import { Box, Container, Flex, Heading, Spacer, Text } from "@chakra-ui/layout";
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/tabs";
 
 import { fetchOnePokemonDetail } from "../features/pokemon/pokemonSlice";
 import BadgePokemon from "../components/BadgePokemon";
 import SpinnerComponent from "../components/SpinnerComponent";
-import { multiplierDamageFrom } from "../utils/multiplierRelations";
+import {
+  multiplierDamageFrom,
+  multiplierDamageTo,
+} from "../utils/multiplierRelations";
 
 export default function DetailPokemon({ match }) {
   const { id } = match.params;
   const dispatch = useDispatch();
   const pokemonData = useSelector((state) => state.pokemon.pokemonDetails);
   const status = useSelector((state) => state.pokemon.status);
+
+  const [tabStat, setTabStat] = useState(multiplierDamageFrom);
 
   const { name, order, sprites, types } = pokemonData[0] ?? [];
   const { flavor_text_entries } = pokemonData[1] ?? [];
@@ -23,24 +29,25 @@ export default function DetailPokemon({ match }) {
   const pokemonImage = sprites?.other["official-artwork"]["front_default"];
   const pokemonDescription = flavor_text_entries?.[1]["flavor_text"];
 
-  // console.log(damage_relations);
   useEffect(() => {
     dispatch(fetchOnePokemonDetail(id));
     // eslint-disable-next-line
   }, []);
 
-  // console.log(pokemonData[1]);
-  // console.log(id);
-  const weaknesses = Object.entries(damage_relations ?? {}).map(
-    ([multiplier, value]) => {
+  const weaknesses = Object.entries(damage_relations ?? {})
+    .filter(([multiplier, value]) => tabStat[multiplier])
+    .map(([multiplier, value]) => {
+      // console.log(multiplier);
+      // double_damage_from
+      // half_damage_from
+      // no_damage_from
       return (
         <div key={multiplier}>
-          {multiplierDamageFrom[multiplier]} -{" "}
+          {multiplierDamageFrom[multiplier] || multiplierDamageTo[multiplier]} -{" "}
           <BadgePokemon types={value.map((pk) => pk.name)} />
         </div>
       );
-    }
-  );
+    });
 
   const PokemonDataRendered = () => (
     <>
@@ -115,7 +122,15 @@ export default function DetailPokemon({ match }) {
           {/** Weaknesses */}
           <Box mt="4">
             <Text mb="1">Multiplier</Text>
-            {weaknesses}
+            <Tabs size="md" variant="enclosed" defa>
+              <TabList justifyContent="end">
+                <Tab onClick={() => setTabStat(multiplierDamageFrom)}>Weak</Tab>
+                <Tab onClick={() => setTabStat(multiplierDamageTo)}>Strong</Tab>
+              </TabList>
+              <TabPanels>
+                <TabPanel>{weaknesses}</TabPanel>
+              </TabPanels>
+            </Tabs>
           </Box>
         </Box>
       </Flex>
