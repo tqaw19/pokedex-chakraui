@@ -121,8 +121,8 @@ export default function DetailPokemon({ match }) {
 
           {/** Weaknesses */}
           <Box mt="4">
-            <Text mb="1">Multiplier</Text>
-            <Tabs size="md" variant="enclosed" defa>
+            <Tabs size="sm" variant="enclosed">
+              <Text mb="1">Multiplier</Text>
               <TabList justifyContent="end">
                 <Tab onClick={() => setTabStat(multiplierDamageFrom)}>Weak</Tab>
                 <Tab onClick={() => setTabStat(multiplierDamageTo)}>Strong</Tab>
