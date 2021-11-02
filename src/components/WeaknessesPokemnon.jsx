@@ -9,11 +9,11 @@ import {
 import BadgePokemon from "./BadgePokemon";
 
 export default function WeaknessesPokemnon(props) {
-  const { damage_relations } = props;
+  const { damageRelations } = props;
 
   const [tabStat, setTabStat] = useState(multiplierDamageFrom);
 
-  const weaknesses = Object.entries(damage_relations ?? {})
+  const weaknesses = Object.entries(damageRelations ?? {})
     .filter(([multiplier, value]) => {
       if (value.length === 0) {
         delete multiplierDamageFrom[multiplier];
