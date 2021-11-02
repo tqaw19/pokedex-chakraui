@@ -35,7 +35,14 @@ export default function DetailPokemon({ match }) {
   }, []);
 
   const weaknesses = Object.entries(damage_relations ?? {})
-    .filter(([multiplier, value]) => tabStat[multiplier])
+    .filter(([multiplier, value]) => {
+      if (value.length === 0) {
+        delete multiplierDamageFrom[multiplier];
+        delete multiplierDamageTo[multiplier];
+      } else {
+        return tabStat[multiplier];
+      }
+    })
     .map(([multiplier, value]) => {
       // console.log(multiplier);
       // double_damage_from
