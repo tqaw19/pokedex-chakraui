@@ -1,24 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Image } from "@chakra-ui/image";
 import { Box, Container, Flex, Heading, Spacer, Text } from "@chakra-ui/layout";
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/tabs";
 
 import { fetchOnePokemonDetail } from "../features/pokemon/pokemonSlice";
 import BadgePokemon from "../components/BadgePokemon";
 import SpinnerComponent from "../components/SpinnerComponent";
-import {
-  multiplierDamageFrom,
-  multiplierDamageTo,
-} from "../utils/multiplierRelations";
+import WeaknessesPokemnon from "../components/WeaknessesPokemnon";
 
 export default function DetailPokemon({ match }) {
   const { id } = match.params;
   const dispatch = useDispatch();
   const pokemonData = useSelector((state) => state.pokemon.pokemonDetails);
   const status = useSelector((state) => state.pokemon.status);
-
-  const [tabStat, setTabStat] = useState(multiplierDamageFrom);
 
   const { name, order, sprites, types } = pokemonData[0] ?? [];
   const { flavor_text_entries, color } = pokemonData[1] ?? [];
@@ -33,28 +27,6 @@ export default function DetailPokemon({ match }) {
     dispatch(fetchOnePokemonDetail(id));
     // eslint-disable-next-line
   }, []);
-
-  const weaknesses = Object.entries(damage_relations ?? {})
-    .filter(([multiplier, value]) => {
-      if (value.length === 0) {
-        delete multiplierDamageFrom[multiplier];
-        delete multiplierDamageTo[multiplier];
-      } else {
-        return tabStat[multiplier];
-      }
-    })
-    .map(([multiplier, value]) => {
-      // console.log(multiplier);
-      // double_damage_from
-      // half_damage_from
-      // no_damage_from
-      return (
-        <div key={multiplier}>
-          {multiplierDamageFrom[multiplier] || multiplierDamageTo[multiplier]} -{" "}
-          <BadgePokemon types={value.map((pk) => pk.name)} />
-        </div>
-      );
-    });
 
   const PokemonDataRendered = () => (
     <Flex
@@ -129,18 +101,7 @@ export default function DetailPokemon({ match }) {
         </Box>
 
         {/** Weaknesses */}
-        <Box mt="4">
-          <Tabs size="sm" variant="enclosed">
-            <Text mb="1">Multiplier</Text>
-            <TabList justifyContent="end">
-              <Tab onClick={() => setTabStat(multiplierDamageFrom)}>Weak</Tab>
-              <Tab onClick={() => setTabStat(multiplierDamageTo)}>Strong</Tab>
-            </TabList>
-            <TabPanels>
-              <TabPanel>{weaknesses}</TabPanel>
-            </TabPanels>
-          </Tabs>
-        </Box>
+        <WeaknessesPokemnon damageRelations={damage_relations} />
       </Box>
     </Flex>
   );
