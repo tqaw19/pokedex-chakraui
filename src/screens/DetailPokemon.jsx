@@ -21,7 +21,7 @@ export default function DetailPokemon({ match }) {
   const [tabStat, setTabStat] = useState(multiplierDamageFrom);
 
   const { name, order, sprites, types } = pokemonData[0] ?? [];
-  const { flavor_text_entries } = pokemonData[1] ?? [];
+  const { flavor_text_entries, color } = pokemonData[1] ?? [];
   const { damage_relations } = pokemonData[3] ?? [];
 
   // const [{ name, order, sprites }, { flavor_text_entries }] = pokemonData ?? [];
@@ -50,91 +50,92 @@ export default function DetailPokemon({ match }) {
     });
 
   const PokemonDataRendered = () => (
-    <>
-      <Flex
-        mt={["4", null, null, "16"]}
-        px={[null, null, null, "44"]}
-        flexDirection={["column", null, "row"]}
-      >
-        <Box width={["full", null, "50%"]} p="4">
-          {/**Pokemon Official artwork image */}
-          <Image
-            src={pokemonImage}
-            alt={name}
-            mx="auto"
-            borderRadius="lg"
-            shadow="md"
-            background="gray.200"
-          />
-        </Box>
+    <Flex
+      mt={["4", null, null, "16"]}
+      px={[null, null, null, "44"]}
+      flexDirection={["column", null, "row"]}
+    >
+      <Box width={["full", null, "50%"]} p="4">
+        {/**Pokemon Official artwork image */}
+        <Image src={pokemonImage} alt={name} />
 
-        <Box width={["full", null, "50%"]} p={["10", null, null, "4"]}>
-          {/** Pokemon Name and Order No. */}
-          <Heading size="md" mb="8" textAlign="center">
-            {name?.toUpperCase()} <Text display="inline">#{order}</Text>
-          </Heading>
-
-          {/** Short Descrioption */}
-          <Text fontSize="smaller">{pokemonDescription}</Text>
-
-          {/** Pokemon Attributes */}
-          <Flex
-            bg="blue.400"
-            mt="4"
-            borderRadius="lg"
-            fontSize="smaller"
-            color="white"
-          >
-            <Text as="span" m="4">
-              Height{" "}
-              <Text mb="4" color="black">
-                2 04
-              </Text>
-              Weight{" "}
-              <Text mb="4" color="black">
-                200
-              </Text>
-              Gender{" "}
-              <Text mb="4" color="black">
-                Male
-              </Text>
-            </Text>
-            <Spacer />
-            <Text as="span" m="4" mr="16">
-              Category{" "}
-              <Text mb="4" color="black">
-                Seed
-              </Text>
-              Abilities{" "}
-              <Text mb="4" color="black">
-                Overgrow
-              </Text>
-            </Text>
+        {/* Pokemon Evolution Chain */}
+        <Box my="8">
+          <Text>Evolution Chain</Text>
+          <Flex direction="row" justify="space-between" my="4">
+            <Image src={pokemonImage} alt={name} boxSize="100px" mx="auto" />
+            <Image src={pokemonImage} boxSize="100px" alt={name} mx="auto" />
+            <Image src={pokemonImage} boxSize="100px" alt={name} mx="auto" />
           </Flex>
-
-          {/** Type */}
-          <Box mt="4">
-            <Text mb="1">Type</Text>
-            {/* <BadgePokemon types={types ?? []} /> */}
-            <BadgePokemon types={types?.map((pk) => pk.type.name) ?? []} />
-          </Box>
-
-          {/** Weaknesses */}
-          <Box mt="4">
-            <Tabs size="sm" variant="enclosed">
-              <Text mb="1">Multiplier</Text>
-              <TabList justifyContent="end">
-                <Tab onClick={() => setTabStat(multiplierDamageFrom)}>Weak</Tab>
-                <Tab onClick={() => setTabStat(multiplierDamageTo)}>Strong</Tab>
-              </TabList>
-              <TabPanels>
-                <TabPanel>{weaknesses}</TabPanel>
-              </TabPanels>
-            </Tabs>
-          </Box>
         </Box>
-      </Flex>
-    </>
+      </Box>
+
+      <Box width={["full", null, "50%"]} p={["10", null, null, "4"]}>
+        {/** Pokemon Name and Order No. */}
+        <Heading size="md" mb="8" textAlign="center">
+          {name?.toUpperCase()} <Text display="inline">#{order}</Text>
+        </Heading>
+
+        {/** Short Descrioption */}
+        <Text fontSize="smaller">{pokemonDescription}</Text>
+
+        {/** Pokemon Attributes */}
+        <Flex
+          bg="blue.400"
+          mt="4"
+          borderRadius="lg"
+          fontSize="smaller"
+          color="white"
+        >
+          <Text as="span" m="4">
+            Height{" "}
+            <Text mb="4" color="black">
+              2 04
+            </Text>
+            Weight{" "}
+            <Text mb="4" color="black">
+              200
+            </Text>
+            Gender{" "}
+            <Text mb="4" color="black">
+              Male
+            </Text>
+          </Text>
+          <Spacer />
+          <Text as="span" m="4" mr="16">
+            Category{" "}
+            <Text mb="4" color="black">
+              Seed
+            </Text>
+            Abilities{" "}
+            <Text mb="4" color="black">
+              Overgrow
+            </Text>
+          </Text>
+        </Flex>
+
+        {/** Type */}
+        <Box mt="4">
+          <Text mb="1">Type</Text>
+          {/* <BadgePokemon types={types ?? []} /> */}
+          <BadgePokemon types={types?.map((pk) => pk.type.name) ?? []} />
+        </Box>
+
+        {/** Weaknesses */}
+        <Box mt="4">
+          <Tabs size="sm" variant="enclosed">
+            <Text mb="1">Multiplier</Text>
+            <TabList justifyContent="end">
+              <Tab onClick={() => setTabStat(multiplierDamageFrom)}>Weak</Tab>
+              <Tab onClick={() => setTabStat(multiplierDamageTo)}>Strong</Tab>
+            </TabList>
+            <TabPanels>
+              <TabPanel>{weaknesses}</TabPanel>
+            </TabPanels>
+          </Tabs>
+        </Box>
+      </Box>
+    </Flex>
   );
 
   return (
@@ -145,7 +146,11 @@ export default function DetailPokemon({ match }) {
       justifyContent="center"
       marginBottom="0"
     >
-      <Container bg="brand.800" maxW="container.xl" p="0">
+      <Container
+        bgGradient={`linear(to-br, ${color?.name}, brand.100)`}
+        maxW="container.xl"
+        p="0"
+      >
         {status === "loading" ? <SpinnerComponent /> : <PokemonDataRendered />}
       </Container>
     </Box>
