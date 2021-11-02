@@ -18,9 +18,8 @@ export default function WeaknessesPokemnon(props) {
       if (value.length === 0) {
         delete multiplierDamageFrom[multiplier];
         delete multiplierDamageTo[multiplier];
-      } else {
-        return tabStat[multiplier];
       }
+      return tabStat[multiplier];
     })
     .map(([multiplier, value]) => {
       // console.log(multiplier);
