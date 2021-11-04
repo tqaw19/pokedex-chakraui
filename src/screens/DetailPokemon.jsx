@@ -119,7 +119,11 @@ export default function DetailPokemon({ match }) {
         maxW="container.xl"
         p="0"
       >
-        {status === "loading" ? <SpinnerComponent /> : <PokemonDataRendered />}
+        {status === "loading" ? (
+          <SpinnerComponent color="white" />
+        ) : (
+          <PokemonDataRendered />
+        )}
       </Container>
     </Box>
   );
