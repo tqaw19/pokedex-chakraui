@@ -46,6 +46,9 @@ export default function ListPokemon() {
           <Flex justify="center">
             <Button
               onClick={() => dispatch(nextOffset())}
+              isLoading={status === "loading"}
+              loadingText="Load More"
+              spinnerPlacement="end"
               colorScheme="brand.200"
               bg="brand.200"
               _hover={{ background: "#04aaa5" }}
