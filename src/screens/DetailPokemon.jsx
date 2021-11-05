@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Image } from "@chakra-ui/image";
-import { Box, Container, Flex, Heading, Spacer, Text } from "@chakra-ui/layout";
+import { Box, Container, Flex, Heading, Text } from "@chakra-ui/layout";
 
 import { fetchOnePokemonDetail } from "../features/pokemon/pokemonSlice";
 import BadgePokemon from "../components/BadgePokemon";
