@@ -7,6 +7,7 @@ import { fetchOnePokemonDetail } from "../features/pokemon/pokemonSlice";
 import BadgePokemon from "../components/BadgePokemon";
 import SpinnerComponent from "../components/SpinnerComponent";
 import WeaknessesPokemnon from "../components/WeaknessesPokemnon";
+import StatsPokemon from "../components/StatsPokemon";
 
 export default function DetailPokemon({ match }) {
   const { id } = match.params;
@@ -14,7 +15,7 @@ export default function DetailPokemon({ match }) {
   const pokemonData = useSelector((state) => state.pokemon.pokemonDetails);
   const status = useSelector((state) => state.pokemon.status);
 
-  const { name, order, sprites, types } = pokemonData[0] ?? [];
+  const { name, order, sprites, types, stats } = pokemonData[0] ?? [];
   const { flavor_text_entries, color } = pokemonData[1] ?? [];
   const { damage_relations } = pokemonData[3] ?? [];
 
@@ -58,40 +59,8 @@ export default function DetailPokemon({ match }) {
         {/** Short Descrioption */}
         <Text fontSize="smaller">{pokemonDescription}</Text>
 
-        {/** Pokemon Attributes */}
-        <Flex
-          bg="blue.400"
-          mt="4"
-          borderRadius="lg"
-          fontSize="smaller"
-          color="white"
-        >
-          <Text as="span" m="4">
-            Height{" "}
-            <Text mb="4" color="black">
-              2 04
-            </Text>
-            Weight{" "}
-            <Text mb="4" color="black">
-              200
-            </Text>
-            Gender{" "}
-            <Text mb="4" color="black">
-              Male
-            </Text>
-          </Text>
-          <Spacer />
-          <Text as="span" m="4" mr="16">
-            Category{" "}
-            <Text mb="4" color="black">
-              Seed
-            </Text>
-            Abilities{" "}
-            <Text mb="4" color="black">
-              Overgrow
-            </Text>
-          </Text>
-        </Flex>
+        {/** Pokemon Stats */}
+        <StatsPokemon stats={stats ?? []} />
 
         {/** Type */}
         <Box mt="4">
