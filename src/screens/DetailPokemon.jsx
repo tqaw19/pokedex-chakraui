@@ -8,6 +8,7 @@ import BadgePokemon from "../components/BadgePokemon";
 import SpinnerComponent from "../components/SpinnerComponent";
 import WeaknessesPokemnon from "../components/WeaknessesPokemnon";
 import StatsPokemon from "../components/StatsPokemon";
+import EvolutionsComponent from "../components/EvolutionsComponent";
 
 export default function DetailPokemon({ match }) {
   const { id } = match.params;
@@ -41,12 +42,7 @@ export default function DetailPokemon({ match }) {
 
         {/* Pokemon Evolution Chain */}
         <Box my="8">
-          <Text>Evolution Chain</Text>
-          <Flex direction="row" justify="space-between" my="4">
-            <Image src={pokemonImage} alt={name} boxSize="100px" mx="auto" />
-            <Image src={pokemonImage} boxSize="100px" alt={name} mx="auto" />
-            <Image src={pokemonImage} boxSize="100px" alt={name} mx="auto" />
-          </Flex>
+          <EvolutionsComponent pokemonImage={pokemonImage} name={name} />
         </Box>
       </Box>
 
