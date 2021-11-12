@@ -22,13 +22,9 @@ export default function WeaknessesPokemnon(props) {
       return tabStat[multiplier];
     })
     .map(([multiplier, value]) => {
-      // console.log(multiplier);
-      // double_damage_from
-      // half_damage_from
-      // no_damage_from
       return (
         <div key={multiplier}>
-          {multiplierDamageFrom[multiplier] || multiplierDamageTo[multiplier]} -{" "}
+          {multiplierDamageFrom[multiplier] || multiplierDamageTo[multiplier]}{" "}
           <BadgePokemon types={value.map((pk) => pk.name)} />
         </div>
       );
@@ -43,6 +39,7 @@ export default function WeaknessesPokemnon(props) {
           <Tab onClick={() => setTabStat(multiplierDamageTo)}>Strong</Tab>
         </TabList>
         <TabPanels>
+          <TabPanel>{weaknesses}</TabPanel>
           <TabPanel>{weaknesses}</TabPanel>
         </TabPanels>
       </Tabs>
