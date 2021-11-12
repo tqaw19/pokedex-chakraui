@@ -36,7 +36,7 @@ export default function WeaknessesPokemnon(props) {
         <Text mb="1">Multiplier</Text>
         <TabList justifyContent="end">
           <Tab onClick={() => setTabStat(multiplierDamageFrom)}>Weak</Tab>
-          <Tab onClick={() => setTabStat(multiplierDamageTo)}>Strong</Tab>
+          <Tab onClick={() => setTabStat(multiplierDamageTo)}>Damage</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>{weaknesses}</TabPanel>
