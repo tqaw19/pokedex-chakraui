@@ -4,7 +4,7 @@ import { client } from "../../config/axios";
 export async function fetchPokemon(offsetValue) {
   try {
     const endPointList = await client.get(
-      `pokemon?offset=${offsetValue}&limit=10`
+      `pokemon?offset=${offsetValue === 10 ? 0 : offsetValue}&limit=10`
     );
     const endPointResponse = await Promise.all(
       endPointList.data.results.map((link) => client.get(link.url))
