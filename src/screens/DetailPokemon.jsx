@@ -53,7 +53,10 @@ export default function DetailPokemon({ match }) {
         </Heading>
 
         {/** Short Descrioption */}
-        <Text fontSize="smaller">{pokemonDescription}</Text>
+        <Text mb="2">About</Text>
+        <Box p="4" borderRadius="lg" bg="rgba(245, 245, 245, 0.3)">
+          <Text fontSize="xs">{pokemonDescription}</Text>
+        </Box>
 
         {/** Pokemon Stats */}
         <StatsPokemon stats={stats ?? []} />
