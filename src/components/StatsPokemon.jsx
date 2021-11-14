@@ -6,7 +6,8 @@ export default function StatsPokemon({ stats }) {
     <>
       <Text mt="6">Base Stats</Text>
       <Flex
-        bg="blue.400"
+        // bg="blue.400"
+        bg="rgba(245, 245, 245, 0.1)"
         mt="2"
         borderRadius="lg"
         fontSize="smaller"
