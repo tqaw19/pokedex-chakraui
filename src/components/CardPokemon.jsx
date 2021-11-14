@@ -19,6 +19,7 @@ export default function CardPokemon(pokemon) {
         overflow="hidden"
         shadow="md"
         bg="gray.200"
+        _hover={{ outline: "3px solid #dddddd" }}
       >
         <Image src={pokemonImage} alt={pokemonImage} />
         <Box p="6">
