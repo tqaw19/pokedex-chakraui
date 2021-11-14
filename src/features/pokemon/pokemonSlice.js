@@ -5,7 +5,7 @@ const initialState = {
   pokemon: [],
   pokemonDetails: [],
   status: "idle",
-  offset: 1,
+  offset: 10,
 };
 
 export const fetchInitialPokemonList = createAsyncThunk(
