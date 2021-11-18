@@ -6,23 +6,25 @@ import { Button } from "@chakra-ui/button";
 import CardPokemon from "./CardPokemon";
 import {
   fetchInitialPokemonList,
-  nextOffset,
+  fetchNextOffSet,
 } from "../features/pokemon/pokemonSlice";
 import SpinnerComponent from "./SpinnerComponent";
 
 export default function ListPokemon() {
   const dispatch = useDispatch();
-  // const pokemonStatus = useSelector((state) => state.pokemon.status);
   const pokemonData = useSelector((state) => state.pokemon.pokemon);
   const status = useSelector((state) => state.pokemon.status);
-  const offsetValue = useSelector((state) => state.pokemon.offset);
+  const offSetValue = useSelector((state) => state.pokemon.offset);
 
   useEffect(() => {
-    if (pokemonData.length !== offsetValue) {
-      dispatch(fetchInitialPokemonList(offsetValue));
-    }
+    if (
+      pokemonData.length ===
+      offSetValue.split("?")[1]?.split("=")[1].split("&")[0]
+    )
+      return;
+    dispatch(fetchInitialPokemonList(offSetValue));
     // eslint-disable-next-line
-  }, [offsetValue]);
+  }, [offSetValue]);
 
   return (
     <>
@@ -45,7 +47,7 @@ export default function ListPokemon() {
           </Grid>
           <Flex justify="center">
             <Button
-              onClick={() => dispatch(nextOffset())}
+              onClick={() => dispatch(fetchNextOffSet(offSetValue))}
               isLoading={status === "loading"}
               loadingText="Load More"
               spinnerPlacement="end"
