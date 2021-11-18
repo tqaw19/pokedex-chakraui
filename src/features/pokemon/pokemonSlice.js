@@ -1,17 +1,29 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchPokemon, fetchOnePokemon } from "./pokemonAPI";
+import {
+  fetchPokemon,
+  fetchNextOffSetUrl,
+  fetchOnePokemon,
+} from "./pokemonAPI";
 
 const initialState = {
   pokemon: [],
   pokemonDetails: [],
   status: "idle",
-  offset: 10,
+  offset: "pokemon?limit=10",
 };
 
 export const fetchInitialPokemonList = createAsyncThunk(
   "pokemon/fetchPokemon",
-  async (offsetValue) => {
-    const response = await fetchPokemon(offsetValue);
+  async (offset) => {
+    const response = await fetchPokemon(offset);
+    return response;
+  }
+);
+
+export const fetchNextOffSet = createAsyncThunk(
+  "pokemon/fetchNextOffSetUrl",
+  async (offset) => {
+    const response = await fetchNextOffSetUrl(offset);
     return response;
   }
 );
@@ -29,9 +41,6 @@ export const pokemonSlice = createSlice({
   initialState,
   reducers: {
     foo: () => {},
-    nextOffset: (state) => {
-      state.offset += 10;
-    },
   },
   extraReducers: (builder) => {
     builder
@@ -45,6 +54,19 @@ export const pokemonSlice = createSlice({
       .addCase(fetchInitialPokemonList.rejected, (state, action) => {
         state.status = "failed";
       })
+
+      // Fetch nextOffSet
+      .addCase(fetchNextOffSet.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(fetchNextOffSet.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.offset = action.payload;
+      })
+      .addCase(fetchNextOffSet.rejected, (state, action) => {
+        state.status = "failed";
+      })
+
       // Fetch one pokemon
       .addCase(fetchOnePokemonDetail.pending, (state, action) => {
         state.status = "loading";
@@ -60,6 +82,6 @@ export const pokemonSlice = createSlice({
   },
 });
 
-export const { foo, nextOffset } = pokemonSlice.actions;
+export const { foo } = pokemonSlice.actions;
 
 export default pokemonSlice.reducer;
