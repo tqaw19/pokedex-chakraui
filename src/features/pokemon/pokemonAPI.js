@@ -3,15 +3,24 @@ import { client } from "../../config/axios";
 // Function that fetch initial pokemon list from pokeapi
 export async function fetchPokemon(offsetValue) {
   try {
-    const endPointList = await client.get(
-      `pokemon?offset=${offsetValue === 10 ? 0 : offsetValue}&limit=10`
-    );
+    const endPointList = await client.get(offsetValue);
     const endPointResponse = await Promise.all(
       endPointList.data.results.map((link) => client.get(link.url))
     );
     const pokeData = await Promise.all(endPointResponse.map((res) => res.data));
 
     return pokeData;
+  } catch (error) {
+    throw new Error();
+  }
+}
+
+// Fetch the next offset value only
+export async function fetchNextOffSetUrl(offsetValue) {
+  try {
+    const endPointList = await client.get(offsetValue);
+    const nextOffSetValue = endPointList.data.next;
+    return nextOffSetValue;
   } catch (error) {
     throw new Error();
   }
