@@ -6,7 +6,6 @@ import DetailPokemon from "./screens/DetailPokemon";
 import { Home } from "./screens/Home";
 import { MyPokemons } from "./screens/MyPokemons";
 
-// import { Counter } from "./features/counter/Counter";
 
 function App() {
   return (
