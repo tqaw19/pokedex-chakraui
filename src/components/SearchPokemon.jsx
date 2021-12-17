@@ -54,7 +54,7 @@ export default function SearchPokemon() {
           py={["5", null, "8"]}
           rounded="lg"
         >
-          Search for a Pokemon by name or using its National Pokedex number
+          Search a Pokemon by name or using its National Pokedex number
         </Text>
       </Box>
     </Flex>
